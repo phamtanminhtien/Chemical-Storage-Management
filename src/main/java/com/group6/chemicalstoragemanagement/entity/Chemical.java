@@ -1,6 +1,8 @@
 package com.group6.chemicalstoragemanagement.entity;
 
 
+import java.time.LocalDate;
+import java.time.Period;
 import java.util.Date;
 
 public class Chemical extends Entity {
@@ -9,9 +11,9 @@ public class Chemical extends Entity {
     private float weight;
     private float minTemp;
     private float maxTemp;
-    private Date expiration;
+    private LocalDate expiration;
 
-    public Chemical(Name name, Cabinet cabinet, Float weight, Float minTemp, Float maxTemp, Date expiration) {
+    public Chemical(Name name, Cabinet cabinet, float weight, float minTemp, float maxTemp, LocalDate expiration) {
         super();
         this.name = name;
         this.cabinet = cabinet;
@@ -20,6 +22,7 @@ public class Chemical extends Entity {
         this.maxTemp = maxTemp;
         this.expiration = expiration;
     }
+
 
     public Name getName() {
         return name;
@@ -61,16 +64,25 @@ public class Chemical extends Entity {
         this.maxTemp = maxTemp;
     }
 
-    public Date getExpiration() {
+    public LocalDate getExpiration() {
         return expiration;
     }
 
-    public void setExpiration(Date expiration) {
+    public void setExpiration(LocalDate expiration) {
         this.expiration = expiration;
     }
 
     public boolean isExpiration() {
-        return (this.expiration.before(new Date()));
+        return (this.expiration.isBefore(LocalDate.now()));
+    }
+
+    public String getStatus(){
+        int length = Period.between(LocalDate.now(), getExpiration()).getDays();
+        if(getExpiration().isBefore(LocalDate.now())){
+            return "Out of date " + length;
+        }else{
+            return "In use " + length;
+        }
     }
 
     public boolean isOutOfTempRange(){

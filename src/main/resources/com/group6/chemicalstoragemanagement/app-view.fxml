@@ -9,33 +9,70 @@
             <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                <children>
-                  <VBox prefHeight="672.0" prefWidth="1000.0">
+                  <VBox prefHeight="672.0" prefWidth="1000.0" style="-fx-padding: 10px; -fx-spacing: 10px;">
                      <children>
-                        <HBox prefHeight="1.0" prefWidth="1000.0">
+                        <HBox prefHeight="1.0" prefWidth="1000.0" style="-fx-spacing: 10px;">
                            <children>
                               <TextField prefHeight="25.0" prefWidth="835.0" promptText="Name" />
-                              <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="80.0" text="Add" />
-                              <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="90.0" text="Delete" />
+                              <Button fx:id="chemicalAddBtn" mnemonicParsing="false" prefHeight="25.0" prefWidth="80.0" text="Add" />
+                              <Button fx:id="chemicalDeleteBtn" mnemonicParsing="false" prefHeight="25.0" prefWidth="90.0" text="Delete" />
                            </children>
                         </HBox>
-                        <HBox prefHeight="19.0" prefWidth="1000.0">
+                        <HBox prefHeight="19.0" prefWidth="1000.0" style="-fx-spacing: 10px;">
                            <children>
                               <Label prefHeight="31.0" prefWidth="28.0" text="Label" />
                               <ChoiceBox fx:id="chemicalCabinet" prefWidth="150.0" />
                               <Label layoutX="10.0" layoutY="10.0" prefHeight="35.0" prefWidth="28.0" text="Label" />
                               <ChoiceBox fx:id="chemicalName" layoutX="38.0" layoutY="10.0" prefWidth="150.0" />
                               <Label layoutX="188.0" layoutY="10.0" prefHeight="36.0" prefWidth="28.0" text="Label" />
-                              <DatePicker />
+                              <DatePicker fx:id="chemicalDate" />
+                              <Label prefHeight="43.0" prefWidth="28.0" text="Label" />
+                              <Slider fx:id="chemicalWeight" prefHeight="8.0" prefWidth="140.0" showTickLabels="true" showTickMarks="true" />
                            </children>
                         </HBox>
-                        <HBox prefHeight="1.0" prefWidth="1000.0">
+                        <HBox prefHeight="1.0" prefWidth="1000.0" style="-fx-spacing: 10px;">
                            <children>
                               <Label prefHeight="43.0" prefWidth="28.0" text="Label" />
-                              <Slider prefHeight="8.0" prefWidth="140.0" showTickLabels="true" showTickMarks="true" />
+                              <Slider fx:id="chemicalMinTemp" prefHeight="8.0" prefWidth="140.0" showTickLabels="true" showTickMarks="true" />
                               <Label layoutX="10.0" layoutY="10.0" prefHeight="43.0" prefWidth="28.0" text="Label" />
-                              <Slider layoutX="38.0" layoutY="10.0" prefHeight="8.0" prefWidth="140.0" showTickLabels="true" showTickMarks="true" />
+                              <Slider fx:id="chemicalMaxTemp" layoutX="38.0" layoutY="10.0" prefHeight="8.0" prefWidth="140.0" showTickLabels="true" showTickMarks="true" />
                            </children>
                         </HBox>
+                        <TableView fx:id="chemicalTable" prefHeight="563.0" prefWidth="980.0">
+                          <columns>
+                            <TableColumn fx:id="chemicalIDCol" prefWidth="75.0" text="ID" />
+                            <TableColumn fx:id="chemicalNameCol" prefWidth="344.0" text="Name" />
+                              <TableColumn fx:id="chemicalCabinetCol" prefWidth="140.0" text="Cabinet" />
+                              <TableColumn fx:id="chemicalMinTempCol" prefWidth="118.0" text="Min Temp" />
+                              <TableColumn fx:id="chemicalMaxTempCol" prefWidth="112.0" text="Max Temp" />
+                              <TableColumn fx:id="chemicalExpirationCol" prefWidth="87.0" text="Expiration" />
+                              <TableColumn fx:id="chemicalStatusCol" prefWidth="103.0" text="Status" />
+                          </columns>
+                        </TableView>
+                     </children>
+                  </VBox>
+               </children></AnchorPane>
+            </content>
+        </Tab>
+        <Tab text="Name">
+            <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                  <VBox prefHeight="674.0" prefWidth="1000.0" style="-fx-padding: 10px; -fx-spacing: 10px;">
+                     <children>
+                        <HBox prefHeight="0.0" prefWidth="980.0" style="-fx-spacing: 10px;">
+                           <children>
+                              <TextField fx:id="nameInput" prefHeight="25.0" prefWidth="795.0" promptText="Name" />
+                              <Button fx:id="nameAddNameBtn" mnemonicParsing="false" prefHeight="25.0" prefWidth="92.0" text="Add New" />
+                              <Button fx:id="nameDeleteBtn" mnemonicParsing="false" prefHeight="25.0" prefWidth="90.0" text="Delete" />
+                           </children>
+                        </HBox>
+                        <TableView fx:id="tableName" prefHeight="651.0" prefWidth="980.0">
+                          <columns>
+                            <TableColumn fx:id="nameID" prefWidth="219.0" text="ID" />
+                              <TableColumn fx:id="nameName" prefWidth="760.0" text="Name" />
+                          </columns>
+                        </TableView>
                      </children>
                   </VBox>
                </children></AnchorPane>
@@ -71,30 +108,6 @@
                           </columns>
                         </TableView>
                      </children></VBox>
-               </children></AnchorPane>
-            </content>
-        </Tab>
-        <Tab text="Name">
-            <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-               <children>
-                  <VBox prefHeight="674.0" prefWidth="1000.0" style="-fx-padding: 10px; -fx-spacing: 10px;">
-                     <children>
-                        <HBox prefHeight="0.0" prefWidth="980.0" style="-fx-spacing: 10px;">
-                           <children>
-                              <TextField fx:id="nameInput" prefHeight="25.0" prefWidth="795.0" promptText="Name" />
-                              <Button fx:id="nameAddNameBtn" mnemonicParsing="false" prefHeight="25.0" prefWidth="92.0" text="Add New" />
-                              <Button fx:id="nameDeleteBtn" mnemonicParsing="false" prefHeight="25.0" prefWidth="90.0" text="Delete" />
-                           </children>
-                        </HBox>
-                        <TableView fx:id="tableName" prefHeight="651.0" prefWidth="980.0">
-                          <columns>
-                            <TableColumn fx:id="nameID" prefWidth="219.0" text="ID" />
-                              <TableColumn fx:id="nameName" prefWidth="760.0" text="Name" />
-                          </columns>
-                        </TableView>
-                     </children>
-                  </VBox>
                </children></AnchorPane>
             </content>
         </Tab>

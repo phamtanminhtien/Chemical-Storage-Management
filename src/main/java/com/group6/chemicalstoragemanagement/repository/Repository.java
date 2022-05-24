@@ -7,7 +7,7 @@ import javafx.collections.ObservableList;
 import java.util.ArrayList;
 
 public class Repository<T> {
-    private final ObservableList<Object> list =  FXCollections.observableArrayList();
+    private final ObservableList<T> list =  FXCollections.observableArrayList();
 
     public void add(T entity){
         list.add(entity);
@@ -20,7 +20,7 @@ public class Repository<T> {
     public ArrayList<T> getAll(){
         return (ArrayList<T>) list;
     }
-    public ObservableList<Object> getObservableList(){
+    public ObservableList<T> getObservableList(){
         return list;
     }
 

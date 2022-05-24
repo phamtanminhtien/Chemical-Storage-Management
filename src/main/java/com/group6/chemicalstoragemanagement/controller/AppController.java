@@ -14,6 +14,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 
 import java.net.URL;
+import java.time.LocalDate;
+import java.time.Period;
 import java.util.*;
 
 public class AppController implements Initializable {
@@ -27,7 +29,7 @@ public class AppController implements Initializable {
     @FXML
     private Button nameDeleteBtn;
     @FXML
-    private TableView<Object> tableName;
+    private TableView<Name> tableName;
     @FXML
     private TableColumn<Name, Object> nameID;
     @FXML
@@ -45,7 +47,7 @@ public class AppController implements Initializable {
     @FXML
     private Slider cabinetCapacity;
     @FXML
-    private TableView<Object> cabinetTable;
+    private TableView<Cabinet> cabinetTable;
     @FXML
     private  TableColumn<Cabinet, Object> cabinetIDCol;
     @FXML
@@ -57,9 +59,38 @@ public class AppController implements Initializable {
 
     //Chemical
     @FXML
-    private ChoiceBox<Object> chemicalCabinet;
+    private Button chemicalAddBtn;
     @FXML
-    private ChoiceBox<Object> chemicalName;
+    private Button chemicalDeleteBtn;
+    @FXML
+    private ChoiceBox<Cabinet> chemicalCabinet;
+    @FXML
+    private ChoiceBox<Name> chemicalName;
+    @FXML
+    private DatePicker chemicalDate;
+    @FXML
+    private Slider chemicalMinTemp;
+    @FXML
+    private Slider chemicalMaxTemp;
+    @FXML
+    private Slider chemicalWeight;
+    @FXML
+    private TableView<Chemical> chemicalTable;
+    @FXML
+    private TableColumn<Chemical, Object> chemicalIDCol;
+    @FXML
+    private TableColumn<Chemical, Object> chemicalNameCol;
+    @FXML
+    private TableColumn<Chemical, Object> chemicalCabinetCol;
+    @FXML
+    private TableColumn<Chemical, Object> chemicalMinTempCol;
+    @FXML
+    private TableColumn<Chemical, Object> chemicalMaxTempCol;
+    @FXML
+    private TableColumn<Chemical, Object> chemicalExpirationCol;
+    @FXML
+    private TableColumn<Chemical, Object> chemicalStatusCol;
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         nameInitialize();
@@ -67,8 +98,66 @@ public class AppController implements Initializable {
         chemicalInitialize();
     }
     private void chemicalInitialize(){
+
         chemicalCabinet.setItems(CabinetRepository.getInstance().getObservableList());
         chemicalName.setItems(NameRepository.getInstance().getObservableList());
+
+        chemicalIDCol.setCellValueFactory(nameObjectCellDataFeatures -> new ObservableValueBase<>() {
+            @Override
+            public Object getValue() {
+                return nameObjectCellDataFeatures.getValue().getID();
+            }
+        });
+        chemicalNameCol.setCellValueFactory(nameObjectCellDataFeatures -> new ObservableValueBase<>() {
+            @Override
+            public Object getValue() {
+                return nameObjectCellDataFeatures.getValue().getName().getName();
+            }
+        });
+
+        chemicalCabinetCol.setCellValueFactory(nameObjectCellDataFeatures -> new ObservableValueBase<>() {
+            @Override
+            public Object getValue() {
+                return nameObjectCellDataFeatures.getValue().getCabinet().getName();
+            }
+        });
+
+        chemicalMinTempCol.setCellValueFactory(nameObjectCellDataFeatures -> new ObservableValueBase<>() {
+            @Override
+            public Object getValue() {
+                return nameObjectCellDataFeatures.getValue().getMinTemp();
+            }
+        });
+
+        chemicalMaxTempCol.setCellValueFactory(nameObjectCellDataFeatures -> new ObservableValueBase<>() {
+            @Override
+            public Object getValue() {
+                return nameObjectCellDataFeatures.getValue().getMaxTemp();
+            }
+        });
+        chemicalExpirationCol.setCellValueFactory(nameObjectCellDataFeatures -> new ObservableValueBase<>() {
+            @Override
+            public Object getValue() {
+                return nameObjectCellDataFeatures.getValue().getExpiration().toString();
+            }
+        });
+
+
+        chemicalStatusCol.setCellValueFactory(nameObjectCellDataFeatures -> new ObservableValueBase<>() {
+            @Override
+            public Object getValue() {
+                return nameObjectCellDataFeatures.getValue().getStatus();
+            }
+        });
+
+
+        chemicalTable.setItems(ChemicalRepository.getInstance().getObservableList());
+
+        chemicalAddBtn.setOnAction(actionEvent -> {
+            Chemical newChemical = new Chemical(chemicalName.getValue(), chemicalCabinet.getValue(), (float) chemicalWeight.getValue(), (float) chemicalMinTemp.getValue(), (float) chemicalMaxTemp.getValue(), chemicalDate.getValue());
+            ChemicalRepository.getInstance().add(newChemical);
+            cabinetName.setText("");
+        });
     }
     private void cabinetInitialize(){
         cabinetIDCol.setCellValueFactory(nameObjectCellDataFeatures -> new ObservableValueBase<>() {
@@ -129,6 +218,8 @@ public class AppController implements Initializable {
             Name newName = new Name(nameInput.getText());
             NameRepository.getInstance().add(newName);
             nameInput.setText("");
+
+
         });
         nameDeleteBtn.setOnAction(actionEvent -> {
             Name selected = (Name) tableName.getSelectionModel().getSelectedItem();
