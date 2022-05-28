@@ -5,6 +5,7 @@ import com.group6.chemicalstoragemanagement.entity.Chemical;
 import com.group6.chemicalstoragemanagement.entity.Name;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class NameRepository extends Repository<Name>{
     private static NameRepository instance;
@@ -26,5 +27,14 @@ public class NameRepository extends Repository<Name>{
         }
 
         super.delete(entity);
+    }
+
+    public Name getById(Long ID){
+
+        for(Name name : getAll()){
+            if(Objects.equals(ID, name.getID())) return name;
+        }
+
+        return null;
     }
 }

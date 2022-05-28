@@ -8,30 +8,29 @@ import com.group6.chemicalstoragemanagement.repository.ChemicalRepository;
 import com.group6.chemicalstoragemanagement.repository.NameRepository;
 import com.group6.chemicalstoragemanagement.utils.Helper;
 import javafx.beans.value.ObservableValueBase;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
-import javafx.stage.FileChooser;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.xssf.usermodel.XSSFSheet;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
-import java.io.File;
-import java.io.FileOutputStream;
 import java.net.URL;
 import java.time.LocalDate;
-import java.time.Period;
 import java.util.*;
 
 public class AppController implements Initializable {
 
 
+    @FXML
+    public VBox panel;
+
+    //    Menu
+    @FXML
+    public MenuItem closeMenuBar;
+    @FXML
+    public MenuItem importMenuBar;
+    @FXML
+    public MenuItem exportMenuBar;
     //Name
     @FXML
     private TextField nameInput;
@@ -45,6 +44,8 @@ public class AppController implements Initializable {
     private TableColumn<Name, Object> nameID;
     @FXML
     private TableColumn<Name, Object> nameName;
+    @FXML
+    private TableColumn<Name, Object> nameCreateAtCol;
 
     //Cabinet
     @FXML
@@ -69,12 +70,10 @@ public class AppController implements Initializable {
     private TableColumn<Cabinet, Object> cabinetNameCol;
     @FXML
     private TableColumn<Cabinet, Object> cabinetOverLoadCol;
+    @FXML
+    private TableColumn<Cabinet, Object> cabinetCreateAtCol;
 
     //Chemical
-    @FXML
-    private Button chemicalExportBtn;
-    @FXML
-    private Button chemicalImportBtn;
     @FXML
     private Button chemicalAddBtn;
     @FXML
@@ -111,23 +110,29 @@ public class AppController implements Initializable {
     private TableColumn<Chemical, Object> chemicalWeightCol;
     @FXML
     private TableColumn<Chemical, Object> chemicalNoteCol;
+    @FXML
+    private TableColumn<Chemical, Object> chemicalCreateAtCol;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        initData();
+//        initData();
+        menu();
         nameInitialize();
         cabinetInitialize();
         chemicalInitialize();
-        action();
     }
-
-    private void action() {
-        chemicalExportBtn.setOnAction(actionEvent -> {
-            Helper.exportNameData();
+    private void menu(){
+        closeMenuBar.setOnAction(actionEvent -> {
+            Stage stage = (Stage) panel.getScene().getWindow();
+            stage.close();
         });
 
-        chemicalImportBtn.setOnAction(actionEvent -> {
-            Helper.importNameData();
+        exportMenuBar.setOnAction(actionEvent -> {
+            Helper.exportData();
+        });
+
+        importMenuBar.setOnAction(actionEvent -> {
+            Helper.importData();
         });
     }
 
@@ -216,6 +221,12 @@ public class AppController implements Initializable {
                 return nameObjectCellDataFeatures.getValue().getWeight();
             }
         });
+        chemicalCreateAtCol.setCellValueFactory(nameObjectCellDataFeatures -> new ObservableValueBase<>() {
+            @Override
+            public Object getValue() {
+                return nameObjectCellDataFeatures.getValue().getCreateAt().toString();
+            }
+        });
 
 
         chemicalTable.setItems(ChemicalRepository.getInstance().getObservableList());
@@ -267,6 +278,13 @@ public class AppController implements Initializable {
             }
         });
 
+        cabinetCreateAtCol.setCellValueFactory(nameObjectCellDataFeatures -> new ObservableValueBase<>() {
+            @Override
+            public Object getValue() {
+                return nameObjectCellDataFeatures.getValue().getCreateAt().toString();
+            }
+        });
+
         cabinetTable.setItems(CabinetRepository.getInstance().getObservableList());
 
         cabinetAddBtn.setOnAction(actionEvent -> {
@@ -296,6 +314,13 @@ public class AppController implements Initializable {
             }
         });
 
+        nameCreateAtCol.setCellValueFactory(nameObjectCellDataFeatures -> new ObservableValueBase<>() {
+            @Override
+            public Object getValue() {
+                return nameObjectCellDataFeatures.getValue().getCreateAt().toString();
+            }
+        });
+
         tableName.setItems(NameRepository.getInstance().getObservableList());
 
         nameAddNameBtn.setOnAction(actionEvent -> {
@@ -310,37 +335,7 @@ public class AppController implements Initializable {
             NameRepository.getInstance().delete(selected);
         });
 
+
     }
 
-
-    //    @Override
-//    public void initialize(URL url, ResourceBundle resourceBundle) {
-//
-//        //Name Table
-//
-//        addNameBtn.setOnAction(actionEvent -> {
-//            NameRepository.getInstance().add(new Name(nameInput.getText()));
-//            reLoadNameTable();
-//        });
-//
-//        nameID.setCellValueFactory(new MapValueFactory<>("ID"));
-//        nameName.setCellValueFactory(new MapValueFactory<>("name"));
-//
-//        NameRepository.getInstance().getAll().forEach(item -> {
-//            listName.add(Entity.parameters(item));
-//        });
-//
-//        tableName.setItems(listName);
-//        //Chemical
-//        chemicalName.setItems(listName);
-//    }
-//
-//    private void reLoadNameTable() {
-//
-//        listName.clear();
-//        NameRepository.getInstance().getAll().forEach(item -> {
-//            listName.add(Entity.parameters(item));
-//        });
-//
-//    }
 }

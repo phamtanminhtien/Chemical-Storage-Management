@@ -9,7 +9,10 @@ public class Name extends Entity {
     private String name;
 
     public Name(String name) {
+        this.name = name;
+    }
 
+    public Name(Long id, String name){
         this.name = name;
     }
 

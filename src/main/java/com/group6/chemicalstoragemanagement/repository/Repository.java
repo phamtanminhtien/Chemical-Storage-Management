@@ -19,7 +19,10 @@ public class Repository<T> {
         list.remove(entity);
         arrayList.remove(entity);
     }
-
+    public void clear(){
+        list.clear();
+        arrayList.clear();
+    }
     public ArrayList<T> getAll(){
         return arrayList;
     }

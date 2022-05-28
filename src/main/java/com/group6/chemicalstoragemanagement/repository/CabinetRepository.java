@@ -2,8 +2,10 @@ package com.group6.chemicalstoragemanagement.repository;
 
 import com.group6.chemicalstoragemanagement.entity.Cabinet;
 import com.group6.chemicalstoragemanagement.entity.Chemical;
+import com.group6.chemicalstoragemanagement.entity.Name;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class CabinetRepository extends Repository<Cabinet>{
 
@@ -27,5 +29,14 @@ public class CabinetRepository extends Repository<Cabinet>{
         }
 
         super.delete(entity);
+    }
+
+    public Cabinet getById(Long ID){
+
+        for(Cabinet cabinet : getAll()){
+            if(Objects.equals(ID, cabinet.getID())) return cabinet;
+        }
+
+        return null;
     }
 }
