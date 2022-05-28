@@ -1,6 +1,9 @@
 package com.group6.chemicalstoragemanagement.repository;
 
 import com.group6.chemicalstoragemanagement.entity.Cabinet;
+import com.group6.chemicalstoragemanagement.entity.Chemical;
+
+import java.util.ArrayList;
 
 public class CabinetRepository extends Repository<Cabinet>{
 
@@ -17,6 +20,12 @@ public class CabinetRepository extends Repository<Cabinet>{
     }
 
 
+    @Override
+    public void delete(Cabinet entity) {
+        for(Chemical chemical : entity.getAllChemical()){
+            ChemicalRepository.getInstance().delete(chemical);
+        }
 
-
+        super.delete(entity);
+    }
 }

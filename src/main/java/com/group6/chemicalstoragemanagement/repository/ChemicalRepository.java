@@ -14,4 +14,7 @@ public class ChemicalRepository extends Repository<Chemical>{
         }
         return instance;
     }
+
+
+
 }

@@ -1,6 +1,9 @@
 package com.group6.chemicalstoragemanagement.entity;
 
 
+import com.group6.chemicalstoragemanagement.repository.ChemicalRepository;
+
+import java.util.ArrayList;
 
 public class Cabinet extends Entity {
     private String name;
@@ -39,11 +42,31 @@ public class Cabinet extends Entity {
     }
 
     public boolean isOverLoad(){
-        return true;
+        ArrayList<Chemical> chemicals = getAllChemical();
+        float totalWeight = 0;
+        for (Chemical chemical : chemicals) {
+            totalWeight += chemical.getWeight();
+        }
+        return totalWeight > capacity;
+    }
+
+
+    public ArrayList<Chemical> getAllChemical(){
+        ArrayList<Chemical> chemicals = ChemicalRepository.getInstance().getAll();
+        ArrayList<Chemical> result = new ArrayList<>();
+
+        for (Chemical chemical : chemicals) {
+            if (chemical.getCabinet() == (this)) result.add(chemical);
+        }
+        return  result;
     }
 
     @Override
     public String toString() {
         return name;
+    }
+
+    public String getStatus(){
+        return  isOverLoad() ? "OverLoad" : "none";
     }
 }

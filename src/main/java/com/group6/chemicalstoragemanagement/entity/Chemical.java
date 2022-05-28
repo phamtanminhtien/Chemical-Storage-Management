@@ -75,6 +75,11 @@ public class Chemical extends Entity {
     public boolean isExpiration() {
         return (this.expiration.isBefore(LocalDate.now()));
     }
+    public boolean isOutOfTempRange(){
+        return cabinet.getTemp() > maxTemp || cabinet.getTemp() < minTemp;
+    }
+
+
 
     public String getStatus(){
         int length = Period.between(LocalDate.now(), getExpiration()).getDays();
@@ -85,9 +90,10 @@ public class Chemical extends Entity {
         }
     }
 
-    public boolean isOutOfTempRange(){
-        return true;
+    public String getNote(){
+        return isOutOfTempRange() ? "Out Range" : "...";
     }
+
 
 
 }

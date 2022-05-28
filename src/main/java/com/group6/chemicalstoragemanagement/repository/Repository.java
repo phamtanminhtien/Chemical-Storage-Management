@@ -8,17 +8,20 @@ import java.util.ArrayList;
 
 public class Repository<T> {
     private final ObservableList<T> list =  FXCollections.observableArrayList();
+    private final ArrayList<T> arrayList =  new ArrayList<>();
 
     public void add(T entity){
         list.add(entity);
+        arrayList.add(entity);
     }
 
     public void delete(T entity){
         list.remove(entity);
+        arrayList.remove(entity);
     }
 
     public ArrayList<T> getAll(){
-        return (ArrayList<T>) list;
+        return arrayList;
     }
     public ObservableList<T> getObservableList(){
         return list;

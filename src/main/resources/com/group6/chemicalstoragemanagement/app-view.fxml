@@ -13,9 +13,10 @@
                      <children>
                         <HBox prefHeight="1.0" prefWidth="1000.0" style="-fx-spacing: 10px;">
                            <children>
-                              <TextField prefHeight="25.0" prefWidth="835.0" promptText="Name" />
                               <Button fx:id="chemicalAddBtn" mnemonicParsing="false" prefHeight="25.0" prefWidth="80.0" text="Add" />
                               <Button fx:id="chemicalDeleteBtn" mnemonicParsing="false" prefHeight="25.0" prefWidth="90.0" text="Delete" />
+                              <Button fx:id="chemicalExportBtn" layoutX="100.0" layoutY="10.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="90.0" text="Export" />
+                              <Button fx:id="chemicalImportBtn" layoutX="200.0" layoutY="10.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="90.0" text="Import" />
                            </children>
                         </HBox>
                         <HBox prefHeight="19.0" prefWidth="1000.0" style="-fx-spacing: 10px;">
@@ -41,12 +42,14 @@
                         <TableView fx:id="chemicalTable" prefHeight="563.0" prefWidth="980.0">
                           <columns>
                             <TableColumn fx:id="chemicalIDCol" prefWidth="75.0" text="ID" />
-                            <TableColumn fx:id="chemicalNameCol" prefWidth="344.0" text="Name" />
-                              <TableColumn fx:id="chemicalCabinetCol" prefWidth="140.0" text="Cabinet" />
-                              <TableColumn fx:id="chemicalMinTempCol" prefWidth="118.0" text="Min Temp" />
-                              <TableColumn fx:id="chemicalMaxTempCol" prefWidth="112.0" text="Max Temp" />
-                              <TableColumn fx:id="chemicalExpirationCol" prefWidth="87.0" text="Expiration" />
-                              <TableColumn fx:id="chemicalStatusCol" prefWidth="103.0" text="Status" />
+                            <TableColumn fx:id="chemicalNameCol" prefWidth="179.0" text="Name" />
+                              <TableColumn fx:id="chemicalCabinetCol" prefWidth="113.0" text="Cabinet" />
+                              <TableColumn fx:id="chemicalWeightCol" prefWidth="132.0" text="Weight" />
+                              <TableColumn fx:id="chemicalMinTempCol" prefWidth="125.0" text="Min Temp" />
+                              <TableColumn fx:id="chemicalMaxTempCol" prefWidth="102.0" text="Max Temp" />
+                              <TableColumn fx:id="chemicalExpirationCol" prefWidth="93.0" text="Expiration" />
+                              <TableColumn fx:id="chemicalStatusCol" prefWidth="78.0" text="Status" />
+                              <TableColumn fx:id="chemicalNoteCol" prefWidth="82.0" text="Note" />
                           </columns>
                         </TableView>
                      </children>
@@ -102,9 +105,10 @@
                         <TableView fx:id="cabinetTable" prefHeight="627.0" prefWidth="980.0">
                           <columns>
                             <TableColumn fx:id="cabinetIDCol" prefWidth="75.0" text="ID" />
-                              <TableColumn fx:id="cabinetNameCol" prefWidth="582.0" text="Name" />
-                            <TableColumn fx:id="cabinetTempCol" prefWidth="142.0" text="Tempurature" />
-                              <TableColumn fx:id="cabinetCapacityCol" minWidth="0.0" prefWidth="180.0" text="Capacity" />
+                              <TableColumn fx:id="cabinetNameCol" prefWidth="511.0" text="Name" />
+                            <TableColumn fx:id="cabinetTempCol" prefWidth="158.0" text="Tempurature" />
+                              <TableColumn fx:id="cabinetCapacityCol" minWidth="0.0" prefWidth="102.0" text="Capacity" />
+                              <TableColumn fx:id="cabinetOverLoadCol" prefWidth="133.0" text="Status" />
                           </columns>
                         </TableView>
                      </children></VBox>
