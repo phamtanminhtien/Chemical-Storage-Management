@@ -24,9 +24,7 @@ public class Helper {
         fileChooser.setTitle("Save");
         fileChooser.setInitialFileName("Chemicals.xlsx");
         fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("All Files", "*.xlsx*"));
-
         return fileChooser.showSaveDialog(new Stage());
-
     }
 
     private static void exportName(XSSFSheet sheetName) {

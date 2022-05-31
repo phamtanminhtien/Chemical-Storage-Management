@@ -21,7 +21,6 @@ public class CabinetRepository extends Repository<Cabinet>{
         return instance;
     }
 
-
     @Override
     public void delete(Cabinet entity) {
         for(Chemical chemical : entity.getAllChemical()){

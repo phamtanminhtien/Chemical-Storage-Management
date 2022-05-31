@@ -50,7 +50,6 @@ public class Cabinet extends Entity {
         return totalWeight > capacity;
     }
 
-
     public ArrayList<Chemical> getAllChemical(){
         ArrayList<Chemical> chemicals = ChemicalRepository.getInstance().getAll();
         ArrayList<Chemical> result = new ArrayList<>();

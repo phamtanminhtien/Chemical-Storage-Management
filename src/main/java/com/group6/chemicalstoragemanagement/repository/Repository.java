@@ -30,12 +30,4 @@ public class Repository<T> {
         return list;
     }
 
-//    public Entity getByID(UUID ID){
-//        for (Entity entity : list) {
-//            if (ID.equals(entity.getID())) {
-//                return entity;
-//            }
-//        }
-//        return null;
-//    }
 }

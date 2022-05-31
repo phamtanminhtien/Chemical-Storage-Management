@@ -23,7 +23,6 @@ public class Chemical extends Entity {
         this.expiration = expiration;
     }
 
-
     public Name getName() {
         return name;
     }
@@ -79,8 +78,6 @@ public class Chemical extends Entity {
         return cabinet.getTemp() > maxTemp || cabinet.getTemp() < minTemp;
     }
 
-
-
     public String getStatus(){
         int length = Period.between(LocalDate.now(), getExpiration()).getDays();
         if(getExpiration().isBefore(LocalDate.now())){
@@ -91,9 +88,6 @@ public class Chemical extends Entity {
     }
 
     public String getNote(){
-        return isOutOfTempRange() ? "Out Range" : "...";
+        return isOutOfTempRange() ? "Out Range" : "None";
     }
-
-
-
 }
